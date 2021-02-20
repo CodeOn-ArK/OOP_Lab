@@ -9,17 +9,17 @@ class A{
 			return x*((num1==1)?1:Factorial(num1--));
 		}
 };
-class B:public A{
+class B:virtual public A{
 	protected:
 		int num1;
 };
-class C:public A{
+class C:virtual public A{
 	protected:
 		int num2;
 };
 class D:public B,public C{
 	public:
-		int x=0
+		int x=0;
 		D(int c,int b,int a):num2(c),B::num1(b),A::num1(a){
 			x=x+Factorial(a);
 		}
@@ -35,15 +35,17 @@ class D:public B,public C{
 			else if(num2<B::num1){
 				if(B::num1>A::num1)
 					cout<<"Class B has largest\n";
-				else if(B::num1<A::num1)
-					cout<<"Class A has largest\n";
+				else if(B::num1<A::num1){
+					if(A::num1 > num2) cout<<"Class A has largest\n";
+					else cout << "\nClass B has largest\n";
+				}
 				else
 					cout<<"Class A & B has largest\n";
 			}
 			else{
-				if(num2>A::num1)
+				if(num2 > A::num1)
 					cout<<"Class B and C has largest\n";
-				else if(num2<A::num1)
+				else if(num2 < A::num1)
 					cout<<"Class A has largest\n";
 				else
 					cout<<"All are equal!!!!!!!!!!!\n";
